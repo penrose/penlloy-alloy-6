@@ -1,0 +1,39 @@
+.DS_Store
+.gradle/
+generated/
+bin/
+bin_test/
+gen/
+target/
+enroute.zip
+.metadata
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+.idea
+*.iml

@@ -1,0 +1,85 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Alloy",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.Alloy",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "DemoFileSystem",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.DemoFileSystem",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "ExampleCompilingFromSource",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.ExampleCompilingFromSource",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "ExampleUsingTheAPI",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.ExampleUsingTheAPI",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "ExampleUsingTheCompiler",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.ExampleUsingTheCompiler",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "InternalTest",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.InternalTest",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "PreferencesDialog",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.PreferencesDialog",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "SimpleCLI",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.SimpleCLI",
+            "projectName": "org.alloytools.alloy.application"
+        },
+        {
+            "type": "java",
+            "name": "SimpleGUI",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4whole.SimpleGUI",
+            "projectName": "org.alloytools.alloy.application",
+            "classPaths": ["$Auto", "$Runtime", "$Test"]
+        },
+        {
+            "type": "java",
+            "name": "WorkerEngine",
+            "request": "launch",
+            "mainClass": "edu.mit.csail.sdg.alloy4.WorkerEngine",
+            "projectName": "org.alloytools.alloy.core"
+        }
+    ]
+}
