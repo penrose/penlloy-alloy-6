@@ -221,7 +221,7 @@ public final class VizGraphPanel extends JPanel {
                 public final void actionPerformed(ActionEvent e) {
                     left.setEnabled(atomCombo.getSelectedIndex() > 0);
                     right.setEnabled(atomCombo.getSelectedIndex() < atomnames.length - 1);
-                    remakeAll(parent);
+                    remakeAll(parent, true);
                     VizGraphPanel.this.getParent().invalidate();
                     VizGraphPanel.this.getParent().repaint();
                 }
@@ -308,7 +308,8 @@ public final class VizGraphPanel extends JPanel {
                 if (viewer.size() <= i)
                     return;
                 else if (ev.getButton() == MouseEvent.BUTTON3) {
-                } else if (ev.getButton() == MouseEvent.BUTTON1 && ev.isControlDown()) {} else
+                } else if (ev.getButton() == MouseEvent.BUTTON1 && ev.isControlDown()) {
+                } else
                     return;
                 if (graphPanel.contains(ev.getX(), ev.getY())) // [electrum] distinguish clicked panel
                     viewer.get(i).alloyPopup(graphPanel, ev.getX(), ev.getY());
@@ -342,7 +343,6 @@ public final class VizGraphPanel extends JPanel {
         remakeAll(parent, false);
     }
 
-    
 
 
     /** Regenerate the comboboxes and the graph. */

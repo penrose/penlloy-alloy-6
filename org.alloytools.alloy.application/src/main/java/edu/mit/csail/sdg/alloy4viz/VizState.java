@@ -225,13 +225,14 @@ public final class VizState {
      * settings.
      */
     public JPanel getGraph(JFrame parent, AlloyProjection projectionChoice, boolean realToSend) {
-        JPanel ans = cache.get(projectionChoice);
-        if (ans != null)
-            return ans;
+        // JPanel ans = cache.get(projectionChoice);
+        // if (ans != null)
+        //     return ans;
         AlloyInstance inst = originalInstance;
+        JPanel ans;
         try {
             ans = StaticGraphMaker.produceGraph(parent, inst, this, projectionChoice, realToSend);
-            cache.put(projectionChoice, ans);
+            // cache.put(projectionChoice, ans);
         } catch (Throwable ex) {
             String msg = "An error has occurred: " + ex + "\n\nStackTrace:\n" + MailBug.dump(ex) + "\n";
             JScrollPane scroll = OurUtil.scrollpane(OurUtil.textarea(msg, 0, 0, false, false));
@@ -545,7 +546,8 @@ public final class VizState {
 
         private final LinkedHashMap<AlloyElement,Integer> map = new LinkedHashMap<AlloyElement,Integer>();
 
-        private MInt() {}
+        private MInt() {
+        }
 
         private void clear() {
             map.clear();
@@ -576,7 +578,8 @@ public final class VizState {
 
         private final LinkedHashMap<AlloyElement,String> map = new LinkedHashMap<AlloyElement,String>();
 
-        private MString() {}
+        private MString() {
+        }
 
         private void clear() {
             map.clear();
