@@ -62,6 +62,12 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
     super(new InetSocketAddress(port));
   }
 
+  private VizGUI vizGUI;
+
+  public void setVizGUI(VizGUI vizGUI) {
+    this.vizGUI = vizGUI;
+  }
+
   @Override
   public void onOpen(WebSocket conn, ClientHandshake handshake) {
     conn.send("{\"kind\": \"connected\"}");
@@ -79,6 +85,13 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
   @Override
   public void onMessage(WebSocket conn, String message) {
     System.out.println("received: " + message);
+    JSONObject msg = new JSONObject(message);
+    String msgTag = msg.getString("kind");
+
+    if (msgTag.equals("ExploreModel")) {
+      String op = msg.getString("op");
+      vizGUI.penlloyExploreModel(op);
+    }
   }
 
   @Override
@@ -107,7 +120,6 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
     }
 
 
-    
 
     sInst.currentModelJson = model.toJson();
     sInst.currentInstanceJson = instance.toJson();
@@ -151,4 +163,6 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
       return false;
     }
   }
+
+
 }
