@@ -90,7 +90,7 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
 
     if (msgTag.equals("ExploreModel")) {
       String op = msg.getString("op");
-      vizGUI.penlloyExploreModel(op);
+      vizGUI.handlePenlloyOp(op);
     }
   }
 
@@ -119,8 +119,6 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
       return false;
     }
 
-
-
     sInst.currentModelJson = model.toJson();
     sInst.currentInstanceJson = instance.toJson();
 
@@ -147,22 +145,33 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
     return status;
   }
 
+  public static boolean broadcastConfig(boolean isTrace) {
+    System.out.println("broadcasting config");
+    PenlloyModelInstanceServer sInst = getServerInstance();
+    if (sInst == null) {
+      System.err.println("failed to send config because server is not running");
+      return false;
+    }
+
+    String jsonMsg = "{\"kind\":\"Config\", \"isTrace\":" + isTrace + "}";
+    sInst.broadcast(jsonMsg);
+
+    return true;
+  }
+
   private boolean sendCurrent(WebSocket conn) {
     if (currentModelJson != null && currentInstanceJson != null) {
       String jsonMsg = "{\"kind\":\"ModelAndInstance\",\"model\":" + currentModelJson + ", \"instance\":" + currentInstanceJson + "}";
       if (conn == null) {
         broadcast(jsonMsg);
-        System.out.println(jsonMsg); //for testing
+        System.out.println(jsonMsg); // for testing
       } else {
         conn.send(jsonMsg);
-        System.out.println(jsonMsg); //for testing
-
+        System.out.println(jsonMsg); // for testing
       }
       return true;
     } else {
       return false;
     }
   }
-
-
 }

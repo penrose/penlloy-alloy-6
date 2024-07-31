@@ -871,6 +871,7 @@ public final class VizGUI implements ComponentListener {
         final AlloyInstance oInst = myStates.get(statepanes - 1).getOriginalInstance();
         final boolean isMeta = oInst.isMetamodel;
         final boolean isTrace = oInst.originalA4.getMaxTrace() >= 0;
+        PenlloyModelInstanceServer.broadcastConfig(isTrace);
         final boolean hasConfigs = oInst.originalA4.hasConfigs();
         vizButton.setVisible(frame != null);
         treeButton.setVisible(frame != null);
@@ -2128,8 +2129,10 @@ public final class VizGUI implements ComponentListener {
     }
 
 
-    public void penlloyExploreModel(String op) {
-        if (op.equals("NewInit")) {
+    public void handlePenlloyOp(String op) {
+        if (op.equals("Next")) {
+            doNext();
+        } else if (op.equals("NewInit")) {
             doInit();
         } else if (op.equals("NewTrace")) {
             doPath();

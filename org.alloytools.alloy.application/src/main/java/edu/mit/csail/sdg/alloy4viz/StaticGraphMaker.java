@@ -88,8 +88,6 @@ public final class StaticGraphMaker {
     private final Graph                      graph;
 
 
-    
-
 
     /**
      * Produces a single Graph from the given Instance and View and choice of
@@ -120,7 +118,6 @@ public final class StaticGraphMaker {
 
 
 
-    
     /**
      * The constructor takes an Instance and a View, then insert the generate
      * graph(s) into a blank cartoon.
@@ -135,7 +132,7 @@ public final class StaticGraphMaker {
         instance = StaticProjector.project(originalInstance, proj);
         model = instance.model;
 
-        
+
         if (realToSend) {
             PenlloyModelInstanceServer.broadcastNewModelAndInstance(model, instance);
         }
