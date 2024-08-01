@@ -62,6 +62,12 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
     super(new InetSocketAddress(port));
   }
 
+  private VizGUI vizGUI;
+
+  public void setVizGUI(VizGUI vizGUI) {
+    this.vizGUI = vizGUI;
+  }
+
   @Override
   public void onOpen(WebSocket conn, ClientHandshake handshake) {
     conn.send("{\"kind\": \"connected\"}");
@@ -79,6 +85,13 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
   @Override
   public void onMessage(WebSocket conn, String message) {
     System.out.println("received: " + message);
+    JSONObject msg = new JSONObject(message);
+    String msgTag = msg.getString("kind");
+
+    if (msgTag.equals("ExploreModel")) {
+      String op = msg.getString("operation");
+      vizGUI.handlePenlloyOp(op);
+    }
   }
 
   @Override
@@ -106,9 +119,6 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
       return false;
     }
 
-
-    
-
     sInst.currentModelJson = model.toJson();
     sInst.currentInstanceJson = instance.toJson();
 
@@ -135,16 +145,27 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
     return status;
   }
 
+  public static boolean broadcastConfig(boolean isTrace) {
+    System.out.println("broadcasting config");
+    PenlloyModelInstanceServer sInst = getServerInstance();
+    if (sInst == null) {
+      System.err.println("failed to send config because server is not running");
+      return false;
+    }
+
+    String jsonMsg = "{\"kind\":\"Config\", \"isTrace\":" + isTrace + "}";
+    sInst.broadcast(jsonMsg);
+
+    return true;
+  }
+
   private boolean sendCurrent(WebSocket conn) {
     if (currentModelJson != null && currentInstanceJson != null) {
       String jsonMsg = "{\"kind\":\"ModelAndInstance\",\"model\":" + currentModelJson + ", \"instance\":" + currentInstanceJson + "}";
       if (conn == null) {
         broadcast(jsonMsg);
-        System.out.println(jsonMsg); //for testing
       } else {
         conn.send(jsonMsg);
-        System.out.println(jsonMsg); //for testing
-
       }
       return true;
     } else {

@@ -2188,6 +2188,11 @@ public final class SimpleGUI implements ComponentListener, Listener {
         viz = new VizGUI(false, "", windowmenu2, enumerator, evaluator, 2);
         viz.doSetFontSize(FontSize.get());
 
+        PenlloyModelInstanceServer penlloyServer = PenlloyModelInstanceServer.getServerInstance();
+        if (penlloyServer != null) {
+            penlloyServer.setVizGUI(viz);
+        }
+
         // Create the toolbar
         try {
             wrap = true;
@@ -2461,8 +2466,6 @@ public final class SimpleGUI implements ComponentListener, Listener {
             }
         });
     }
-
-
 
 
 

@@ -871,6 +871,7 @@ public final class VizGUI implements ComponentListener {
         final AlloyInstance oInst = myStates.get(statepanes - 1).getOriginalInstance();
         final boolean isMeta = oInst.isMetamodel;
         final boolean isTrace = oInst.originalA4.getMaxTrace() >= 0;
+        PenlloyModelInstanceServer.broadcastConfig(isTrace);
         final boolean hasConfigs = oInst.originalA4.hasConfigs();
         vizButton.setVisible(frame != null);
         treeButton.setVisible(frame != null);
@@ -1199,10 +1200,10 @@ public final class VizGUI implements ComponentListener {
                             vstate = new VizState(myInstance);
                         else
                             vstate.loadInstance(myInstance);
-                        
+
                         myStates.set(i, vstate);
                     }
-                    
+
                 } catch (Throwable e) {
                     xmlLoaded.remove(fileName);
                     xmlLoaded.remove(xmlFileName);
@@ -2003,7 +2004,7 @@ public final class VizGUI implements ComponentListener {
     /**
      * The currently focused state (the one printed in the left-most graph panel).
      */
-    private int    current          = 0;
+    private int current = 0;
 
     /*
      * Draws a graph depicting the shape of the trace being visualized. States are
@@ -2127,4 +2128,20 @@ public final class VizGUI implements ComponentListener {
         return idx > loop ? (((idx - loop) % lln) + loop) : idx;
     }
 
+
+    public void handlePenlloyOp(String op) {
+        if (op.equals("Next")) {
+            doNext();
+        } else if (op.equals("NewInit")) {
+            doInit();
+        } else if (op.equals("NewTrace")) {
+            doPath();
+        } else if (op.equals("NewFork")) {
+            doFork();
+        } else if (op.equals("StepLeft")) {
+            doNavLeft();
+        } else if (op.equals("StepRight")) {
+            doNavRight();
+        }
+    }
 }
