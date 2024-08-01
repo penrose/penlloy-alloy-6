@@ -89,7 +89,7 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
     String msgTag = msg.getString("kind");
 
     if (msgTag.equals("ExploreModel")) {
-      String op = msg.getString("op");
+      String op = msg.getString("operation");
       vizGUI.handlePenlloyOp(op);
     }
   }
@@ -164,10 +164,8 @@ public class PenlloyModelInstanceServer extends WebSocketServer {
       String jsonMsg = "{\"kind\":\"ModelAndInstance\",\"model\":" + currentModelJson + ", \"instance\":" + currentInstanceJson + "}";
       if (conn == null) {
         broadcast(jsonMsg);
-        System.out.println(jsonMsg); // for testing
       } else {
         conn.send(jsonMsg);
-        System.out.println(jsonMsg); // for testing
       }
       return true;
     } else {
